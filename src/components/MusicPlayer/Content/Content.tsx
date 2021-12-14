@@ -44,7 +44,9 @@ const Content: FC = () => {
                   <td>
                     <Favorite isFavorite={isFavorite} />
                   </td>
-                  <td onClick={()=>dispatch({type:'PLAY', path:music_file_path})}>{name}</td>
+                  <td
+                  className='songName'
+                   onClick={()=>dispatch({type:'PLAY', path:music_file_path})}>{name}</td>
                   <td>{artist_name}</td>
                 </tr>
               )

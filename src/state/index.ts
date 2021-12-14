@@ -14,6 +14,7 @@ export const reducer = (state:IInitialState = initialState, action) => {
         case 'PLAY':
             return {
                 ...state,
+                playing:true,
                 music_file_path: action.path || state.music_file_path
             }
         default:

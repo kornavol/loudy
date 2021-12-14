@@ -20,6 +20,7 @@
   text-transform: capitalize;
 }
 
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -35,7 +36,7 @@ table td {
   padding: 10px 0;
 }
 
-i {
+i, .songName {
   cursor: pointer;
 }
 
