@@ -78,15 +78,10 @@ export default Content
 
 const Favorite =  ({ isFavorite, id })  => {
   
-  const fetchLike = async (id) => {
-    const result = await likeSong(id)
-    console.log('result', result );  
-  }
-    
   return isFavorite ? (
     <i className="fa fa-heart" />
   ) : (
-    <i onClick={()=>fetchLike(id)} className="fa fa-heart-o" />
+    <i onClick={()=>likeSong(id)} className="fa fa-heart-o" />
   )
 }
 
