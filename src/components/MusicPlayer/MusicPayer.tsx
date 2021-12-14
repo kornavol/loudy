@@ -1,18 +1,30 @@
-import React, { FC } from "react";
+import './style.css'
 
-import "./style.css"
+import React, {
+  FC,
+  createContext,
+  useReducer
+} from 'react'
 
-import Content from "./Content/Content";
-import Playbar from "./Playbar/Playbar";
+import Content from './Content/Content'
+import Playbar from './Playbar/Playbar'
 
+import { initialState, reducer } from '../../state'
+
+export const StoreContext = createContext(null)
 
 const MusicPayer: FC = () => {
-  return (
-    <div id="musicPlayer">
-      <Content />
-      <Playbar />
-    </div>
-  );
-};
+  const [state, dispatch] = useReducer<any>(reducer, initialState)
 
-export default MusicPayer;
+  return (
+    <StoreContext.Provider value={{ state, dispatch }}>
+      <div id="musicPlayer">
+        <Content />
+        <Playbar />
+      </div>
+    </StoreContext.Provider>
+  )
+}
+
+export default MusicPayer
+ 

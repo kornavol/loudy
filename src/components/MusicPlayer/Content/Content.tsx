@@ -1,22 +1,26 @@
-import React, { FC, useEffect, useState } from "react";
-import "./style.css";
-import { loadSongs } from "../../../api";
+import React, { FC, useEffect, useState, useContext  } from 'react'
+import { StoreContext } from '../MusicPayer'
+
+import './style.css'
+import { loadSongs } from '../../../api'
 
 const Content: FC = () => {
-  const [list, setList] = useState<any>([]);
+  const { state, dispatch } = useContext(StoreContext)
+  
+  const [list, setList] = useState<any>([])
   const [isFavorite, setIsFavorite] = useState(false)
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const result = await loadSongs();
+      const result = await loadSongs()
       if (result && result.status === 200) {
-        setList(result.data);
+        setList(result.data)
       }
-    };
-    fetchSongs();
-  }, []);
+    }
+    fetchSongs()
+  }, [])
 
-  console.log(list);
+  console.log(list)
 
   return (
     <div id="content">
@@ -31,38 +35,30 @@ const Content: FC = () => {
         <tbody>
           {list &&
             list.map((song: any) => {
-              const { id, name } = song;
-              const artist = song.artist_name;
+              const { id, name } = song
+              const artist = song.artist_name
               return (
                 <tr key={id}>
                   <td>
-                  <Favorite
-                      isFavorite={isFavorite}
-                    />
+                    <Favorite isFavorite={isFavorite} />
                   </td>
                   <td>{name}</td>
                   <td>{artist}</td>
                 </tr>
-              );
+              )
             })}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Content;
-
+export default Content
 
 const Favorite = ({ isFavorite }) => {
-  
   return isFavorite ? (
-    <i
-      className="fa fa-heart"
-    />
+    <i className="fa fa-heart" />
   ) : (
-    <i
-      className="fa fa-heart-o"
-    />
+    <i className="fa fa-heart-o" />
   )
 }
