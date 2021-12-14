@@ -1,19 +1,22 @@
 interface IInitialState {
-    test:string
+    music_file_path: string
+    playing: boolean
 }
 
-export const initialState : IInitialState  ={
-    test: 'test'
+export const initialState: IInitialState = {
+    music_file_path: "",
+    playing: false,
 }
 
 
-export const reducer = (state ='tt', action) => {
+export const reducer = (state:IInitialState = initialState, action) => {
     switch (action.type) {
-        case 'TEST':
-            state = 'test-state' 
-            return  state
-    
+        case 'PLAY':
+            return {
+                ...state,
+                music_file_path: action.path || state.music_file_path
+            }
         default:
-            return  state
+            return state
     }
 }

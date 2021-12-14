@@ -14,6 +14,8 @@ const Content: FC = () => {
     const fetchSongs = async () => {
       const result = await loadSongs()
       if (result && result.status === 200) {
+        console.log(result.data);
+        
         setList(result.data)
       }
     }
@@ -35,15 +37,15 @@ const Content: FC = () => {
         <tbody>
           {list &&
             list.map((song: any) => {
-              const { id, name } = song
-              const artist = song.artist_name
+              const { id, name, music_file_path, artist_name } = song
+              
               return (
                 <tr key={id}>
                   <td>
                     <Favorite isFavorite={isFavorite} />
                   </td>
-                  <td>{name}</td>
-                  <td>{artist}</td>
+                  <td onClick={()=>dispatch({type:'PLAY', path:music_file_path})}>{name}</td>
+                  <td>{artist_name}</td>
                 </tr>
               )
             })}
