@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState, useContext } from 'react'
 import { StoreContext } from '../MusicPayer'
 
 import './style.css'
-import { loadSongs } from '../../../api'
+import { loadSongs, likeSong } from '../../../api'
 
 const Content: FC = () => {
   const { state, dispatch } = useContext(StoreContext)
@@ -43,7 +43,7 @@ const Content: FC = () => {
               return (
                 <tr key={id}>
                   <td style={{ width: 75, paddingLeft: 5 }}>
-                    <Favorite isFavorite={isFavorite} />
+                    <Favorite isFavorite={isFavorite} id={id}/>
 
                     <span style={{ marginRight: 20 }} />
 
@@ -76,11 +76,17 @@ const Content: FC = () => {
 
 export default Content
 
-const Favorite = ({ isFavorite }) => {
+const Favorite =  ({ isFavorite, id })  => {
+  
+  const fetchLike = async (id) => {
+    const result = await likeSong(id)
+    console.log('result', result );  
+  }
+    
   return isFavorite ? (
     <i className="fa fa-heart" />
   ) : (
-    <i className="fa fa-heart-o" />
+    <i onClick={()=>fetchLike(id)} className="fa fa-heart-o" />
   )
 }
 
