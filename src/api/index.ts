@@ -18,9 +18,9 @@ export const loadSongs = async () => {
 export const likeSong = async (payload) => {
     const config = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
-      }
+    }
 
     const params = new URLSearchParams()
     params.append('id', payload)

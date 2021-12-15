@@ -5,7 +5,7 @@ import { StoreContext } from '../MusicPayer'
 import { formatTime, handleProgress } from '../../../utils'
 
 interface Iprops {
-  list: any
+  list: any[]
 }
 
 const Playbar: FC<Iprops> = ({ list }) => {
@@ -19,7 +19,6 @@ const Playbar: FC<Iprops> = ({ list }) => {
   const song = list[index]
   const playOrPause = () =>
     state.playing ? dispatch({ type: 'PAUSE' }) : dispatch({ type: 'PLAY' })
-
 
   return (
     <div id="playbar">
@@ -67,8 +66,10 @@ const Playbar: FC<Iprops> = ({ list }) => {
           value={state.volume}
           step="0.01"
           style={{ marginLeft: 10 }}
-          onChange={e=>dispatch({ type: 'SET_VOLUME', volume: e.target.value })}
-          />
+          onChange={(e) =>
+            dispatch({ type: 'SET_VOLUME', volume: e.target.value })
+          }
+        />
       </div>
     </div>
   )

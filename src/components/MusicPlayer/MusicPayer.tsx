@@ -20,14 +20,12 @@ export const StoreContext = createContext(null)
 
 const MusicPayer: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const [list, setList] = useState<any>([])
+  const [list, setList] = useState([])
 
   useEffect(() => {
     const fetchSongs = async () => {
       const result = await loadSongs()
       if (result && result.status === 200) {
-        // console.log(result.data)
-
         setList(result.data)
       }
     }

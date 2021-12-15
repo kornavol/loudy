@@ -5,7 +5,7 @@ import './style.scss'
 import { likeSong } from '../../../api'
 
 interface Iprops {
-  list: any
+  list: any[]
 }
 
 const Content: FC<Iprops> = ({ list }) => {
@@ -96,7 +96,9 @@ const Favorite = ({ id }) => {
 
 const PlayPause = ({ playing, isCurrentSong, visible }) => {
   const { dispatch } = useContext(StoreContext)
-  const style: any = { visibility: visible ? 'visible' : 'hidden' }
+  const style: React.CSSProperties = {
+    visibility: visible ? 'visible' : 'hidden'
+  }
 
   if (isCurrentSong && playing) {
     return (

@@ -1,6 +1,6 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 
-import './App.css'
+import './style.scss'
 import MusicPayer from '../components/MusicPlayer/MusicPayer'
 
 const App: FC = () => {
@@ -11,4 +11,4 @@ const App: FC = () => {
   )
 }
 
-export default memo(App)
+export default App

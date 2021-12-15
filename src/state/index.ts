@@ -5,7 +5,7 @@ interface IInitialState {
     index: string
     currentTime: number
     duration: number
-    volume:number
+    volume: number
 }
 
 const DEFAULT_VOLUME = 0.65
@@ -38,6 +38,6 @@ export const reducer = (state: IInitialState = initialState, action) => {
             return { ...state, duration: action.duration }
         case 'SET_VOLUME':
             return { ...state, volume: parseFloat(action.volume) }
-        }
+    }
     return state
 }
