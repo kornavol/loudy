@@ -8,7 +8,7 @@ const Content: FC = () => {
   const { state, dispatch } = useContext(StoreContext)
 
   const [list, setList] = useState<any>([])
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState([])
   const [playVisibleId, setPlayVisibleId] = useState('')
 
   useEffect(() => {
@@ -37,13 +37,16 @@ const Content: FC = () => {
         </thead>
         <tbody>
           {list &&
-            list.map((song: any) => {
-              const { id, name, music_file_path, artist_name } = song
+            list.map((song: any, i) => {
+              const { id, name, music_file_path, artist_name, isFavorite } = song
+
+              console.log(2, isFavorite);
+              
 
               return (
                 <tr key={id}>
                   <td style={{ width: 75, paddingLeft: 5 }}>
-                    <Favorite isFavorite={isFavorite} id={id}/>
+                    <Favorite isFavorite={isFavorite} id={id} addToList={setList} i={i} />
 
                     <span style={{ marginRight: 20 }} />
 
@@ -76,12 +79,26 @@ const Content: FC = () => {
 
 export default Content
 
-const Favorite =  ({ isFavorite, id })  => {
+const Favorite = ({ isFavorite, id, addToList, i }) => {
+  // !!!
   
+  const favoriteHandler = (id) => {
+    likeSong(id)
+
+    addToList((prev) => {
+      // const curr = Object.assign({}, prev)
+      prev[i].isFavorite = true
+      return prev
+    })
+  }
+
+  console.log(1, isFavorite);
+  
+
   return isFavorite ? (
     <i className="fa fa-heart" />
   ) : (
-    <i onClick={()=>likeSong(id)} className="fa fa-heart-o" />
+    <i onClick={() => favoriteHandler(id)} className="fa fa-heart-o" />
   )
 }
 
