@@ -31,6 +31,7 @@ const Content: FC = () => {
         <thead>
           <tr>
             <td />
+            <td />
             <td>Title</td>
             <td>Artist</td>
           </tr>
@@ -38,12 +39,12 @@ const Content: FC = () => {
         <tbody>
           {list &&
             list.map((song: any) => {
-              const { id, name, music_file_path, artist_name } = song
+              const { id, name, music_file_path, artist_name, cover_image_path } = song
 
               return (
                 <tr key={id}>
                   <td style={{ width: 75, paddingLeft: 5 }}>
-                    <Favorite isFavorite={isFavorite} id={id}/>
+                    <Favorite  id={id} />
 
                     <span style={{ marginRight: 20 }} />
 
@@ -54,6 +55,9 @@ const Content: FC = () => {
                     />
 
                     <span style={{ marginRight: 20 }} />
+                  </td>
+                  <td>
+                    <img src={cover_image_path} alt="" />
                   </td>
                   <td
                     className="songName"
@@ -76,12 +80,19 @@ const Content: FC = () => {
 
 export default Content
 
-const Favorite =  ({ isFavorite, id })  => {
-  
+const Favorite = ({ id }) => {
+  const [isFavorite, setIsFavorite] = useState(false)
+
   return isFavorite ? (
-    <i className="fa fa-heart" />
+    <i className="fa fa-heart" onClick={() => setIsFavorite((prev) => !prev)} />
   ) : (
-    <i onClick={()=>likeSong(id)} className="fa fa-heart-o" />
+    <i
+      onClick={() => {
+        likeSong(id)
+        setIsFavorite((prev) => !prev)
+      }}
+      className="fa fa-heart-o"
+    />
   )
 }
 
