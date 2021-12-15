@@ -43,6 +43,10 @@ const MusicPayer: FC = () => {
     } else audioRef.current.pause()
   }, [state.playing, state.music_file_path])
 
+  useEffect(() => {
+    audioRef.current.volume = state.volume
+  }, [state.volume])
+
   const song = state.music_file_path
 
   return (

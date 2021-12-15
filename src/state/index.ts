@@ -5,7 +5,10 @@ interface IInitialState {
     index: string
     currentTime: number
     duration: number
+    volume:number
 }
+
+const DEFAULT_VOLUME = 0.65
 
 export const initialState: IInitialState = {
     id: "",
@@ -13,7 +16,8 @@ export const initialState: IInitialState = {
     playing: false,
     index: "",
     currentTime: 0,
-    duration: 0
+    duration: 0,
+    volume: DEFAULT_VOLUME
 }
 
 export const reducer = (state: IInitialState = initialState, action) => {
@@ -24,9 +28,6 @@ export const reducer = (state: IInitialState = initialState, action) => {
                 playing: true,
                 music_file_path: action.path || state.music_file_path,
                 id: action.id || state.id,
-                /* В дпнном случае я передавал 0, через action. 
-                Но тут это не отрабаываетб
-                 так как используеться оператор или который приравнивает 0 к false  и не меняет значение */
                 index: action.index || state.index
             }
         case 'PAUSE':
@@ -35,6 +36,8 @@ export const reducer = (state: IInitialState = initialState, action) => {
             return { ...state, currentTime: action.time }
         case 'SET_DURATION':
             return { ...state, duration: action.duration }
+        case 'SET_VOLUME':
+            return { ...state, volume: parseFloat(action.volume) }
         }
     return state
 }

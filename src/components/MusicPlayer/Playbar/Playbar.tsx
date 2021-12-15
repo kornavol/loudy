@@ -20,6 +20,7 @@ const Playbar: FC<Iprops> = ({ list }) => {
   const playOrPause = () =>
     state.playing ? dispatch({ type: 'PAUSE' }) : dispatch({ type: 'PLAY' })
 
+
   return (
     <div id="playbar">
       <div className="left">
@@ -38,21 +39,36 @@ const Playbar: FC<Iprops> = ({ list }) => {
             className={`fa fa-${state.playing ? 'pause' : 'play'}`}
             style={{ transform: state.playing ? '' : 'translateX(1.5px)' }}
           />
-          <div style={{ marginTop: 2.5 }}>
-            <span>{formatTime(Math.floor(state.currentTime))}</span>
-
-            <div className="progress-container">
-              <div
-                className="bar"
-                style={{
-                  width: handleProgress(state.currentTime, state.duration)
-                }}
-              />
-            </div>
-
-            <span>{formatTime(state.duration)}</span>
-          </div>
         </div>
+
+        <div style={{ marginTop: 2.5 }}>
+          <span>{formatTime(Math.floor(state.currentTime))}</span>
+
+          <div className="progress-container">
+            <div
+              className="bar"
+              style={{
+                width: handleProgress(state.currentTime, state.duration)
+              }}
+            />
+          </div>
+
+          <span>{formatTime(state.duration)}</span>
+        </div>
+      </div>
+
+      <div className="right">
+        <i className="fa fa-volume-up" />
+
+        <input
+          type="range"
+          min="0"
+          max="1"
+          value={state.volume}
+          step="0.01"
+          style={{ marginLeft: 10 }}
+          onChange={e=>dispatch({ type: 'SET_VOLUME', volume: e.target.value })}
+          />
       </div>
     </div>
   )
