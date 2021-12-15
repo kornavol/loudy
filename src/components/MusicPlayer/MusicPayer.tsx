@@ -12,16 +12,11 @@ import React, {
 import Content from './Content/Content'
 import Playbar from './Playbar/Playbar'
 
-import { loadSongs} from '../../api'
+import { loadSongs } from '../../api'
 
 import { initialState, reducer } from '../../state'
 
 export const StoreContext = createContext(null)
-
-interface IInitialState {
-  music_file_path: string
-  playing: boolean
-}
 
 const MusicPayer: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -39,8 +34,6 @@ const MusicPayer: FC = () => {
     fetchSongs()
   }, [])
 
-  
-
   const audioRef = useRef<HTMLAudioElement>()
 
   useEffect(() => {
@@ -52,7 +45,6 @@ const MusicPayer: FC = () => {
 
   const song = state.music_file_path
 
-
   return (
     <StoreContext.Provider value={{ state, dispatch }}>
       <div id="musicPlayer">
@@ -61,10 +53,18 @@ const MusicPayer: FC = () => {
       </div>
 
       <audio
-          ref={audioRef}
-          src={song && song}
-        />
-
+        ref={audioRef}
+        src={song && song}
+        onLoadedMetadata={() =>
+          dispatch({
+            type: 'SET_DURATION',
+            duration: audioRef.current.duration
+          })
+        }
+        onTimeUpdate={(e: any) =>
+          dispatch({ type: 'SET_CURRENT_TIME', time: e.target.currentTime })
+        }
+      />
     </StoreContext.Provider>
   )
 }

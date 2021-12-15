@@ -55,12 +55,11 @@ const Content: FC<Iprops> = ({ list }) => {
                   <td
                     className="songName"
                     onClick={() => {
-                      console.log('1 index', index);
                       dispatch({
                         type: 'PLAY',
                         path: music_file_path,
                         id,
-                        index:  index.toString() 
+                        index: index.toString()
                       })
                       setPlayVisibleId(id)
                     }}
