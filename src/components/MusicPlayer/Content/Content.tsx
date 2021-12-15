@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react'
+import React, { FC, useState, useContext } from 'react'
 import { StoreContext } from '../MusicPayer'
 
 import './style.scss'
