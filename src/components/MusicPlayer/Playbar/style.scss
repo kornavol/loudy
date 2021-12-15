@@ -1,15 +1,26 @@
+$height: 80px;
+
+@keyframes move {
+  from {
+    bottom: -$height;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+
 #playbar {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px;
   background: #282828;
   z-index: 99;
-  padding: 0 20px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  animation: move 2s;
 
   .left {
     width: 200px;
@@ -42,7 +53,8 @@
       cursor: pointer;
     }
     .progress-container {
-      width: 600px;
+      max-width: 600px;
+      width: 50vw;
       height: 5px;
       position: relative;
       background-color: #4f4f4f;
@@ -55,11 +67,16 @@
         background-color: rgb(167 167 167);
       }
     }
-    .right {
-      .fa-volume-up,
-      .fa-volume-off {
-        font-size: 20px;
-      }
+  }
+  .right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+    .fa-volume-up,
+    .fa-volume-off {
+      font-size: 20px;
     }
   }
 }

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, useContext } from 'react'
 import { StoreContext } from '../MusicPayer'
 
-import './style.css'
+import './style.scss'
 import { likeSong } from '../../../api'
 
 interface Iprops {
@@ -53,7 +53,7 @@ const Content: FC<Iprops> = ({ list }) => {
                     <img src={cover_image_path} alt="" />
                   </td>
                   <td
-                    className="songName"
+                    className="song-name"
                     onClick={() => {
                       dispatch({
                         type: 'PLAY',
