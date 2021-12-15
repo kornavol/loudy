@@ -5,11 +5,14 @@ import React, {
   createContext,
   useReducer,
   useRef,
-  useEffect
+  useEffect,
+  useState
 } from 'react'
 
 import Content from './Content/Content'
 import Playbar from './Playbar/Playbar'
+
+import { loadSongs} from '../../api'
 
 import { initialState, reducer } from '../../state'
 
@@ -22,8 +25,20 @@ interface IInitialState {
 
 const MusicPayer: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [list, setList] = useState<any>([])
 
-  // console.log(1, state);
+  useEffect(() => {
+    const fetchSongs = async () => {
+      const result = await loadSongs()
+      if (result && result.status === 200) {
+        // console.log(result.data)
+
+        setList(result.data)
+      }
+    }
+    fetchSongs()
+  }, [])
+
   
 
   const audioRef = useRef<HTMLAudioElement>()
@@ -41,8 +56,8 @@ const MusicPayer: FC = () => {
   return (
     <StoreContext.Provider value={{ state, dispatch }}>
       <div id="musicPlayer">
-        <Content />
-        <Playbar />
+        <Content list={list} />
+        <Playbar list={list} />
       </div>
 
       <audio

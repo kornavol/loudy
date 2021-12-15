@@ -2,28 +2,15 @@ import React, { FC, useEffect, useState, useContext } from 'react'
 import { StoreContext } from '../MusicPayer'
 
 import './style.css'
-import { loadSongs, likeSong } from '../../../api'
+import { likeSong } from '../../../api'
 
-const Content: FC = () => {
+interface Iprops {
+  list: any
+}
+
+const Content: FC<Iprops> = ({ list }) => {
   const { state, dispatch } = useContext(StoreContext)
-
-  const [list, setList] = useState<any>([])
-  const [isFavorite, setIsFavorite] = useState(false)
   const [playVisibleId, setPlayVisibleId] = useState('')
-
-  useEffect(() => {
-    const fetchSongs = async () => {
-      const result = await loadSongs()
-      if (result && result.status === 200) {
-        console.log(result.data)
-
-        setList(result.data)
-      }
-    }
-    fetchSongs()
-  }, [])
-
-  console.log(list)
 
   return (
     <div id="content">
@@ -38,13 +25,19 @@ const Content: FC = () => {
         </thead>
         <tbody>
           {list &&
-            list.map((song: any) => {
-              const { id, name, music_file_path, artist_name, cover_image_path } = song
+            list.map((song: any, index: number) => {
+              const {
+                id,
+                name,
+                music_file_path,
+                artist_name,
+                cover_image_path
+              } = song
 
               return (
                 <tr key={id}>
                   <td style={{ width: 75, paddingLeft: 5 }}>
-                    <Favorite  id={id} />
+                    <Favorite id={id} />
 
                     <span style={{ marginRight: 20 }} />
 
@@ -62,7 +55,13 @@ const Content: FC = () => {
                   <td
                     className="songName"
                     onClick={() => {
-                      dispatch({ type: 'PLAY', path: music_file_path, id })
+                      console.log('1 index', index);
+                      dispatch({
+                        type: 'PLAY',
+                        path: music_file_path,
+                        id,
+                        index:  index.toString() 
+                      })
                       setPlayVisibleId(id)
                     }}
                   >
