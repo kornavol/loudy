@@ -25,5 +25,3 @@ You will also see any lint errors in the console.
 
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org)
-- [Material UI](https://material-ui.com)
-- [aos](https://www.npmjs.com/package/aos)
