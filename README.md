@@ -25,3 +25,4 @@ You will also see any lint errors in the console.
 
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org)
+- [Sass](https://sass-lang.com/)
